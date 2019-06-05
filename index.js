@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+const cors = require("cors");
 const app = express();
 
 let people = [
@@ -26,6 +27,7 @@ let people = [
   }
 ];
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(
   morgan((tokens, req, res) => {
@@ -109,7 +111,7 @@ app.get("/info", (req, res) => {
   );
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
